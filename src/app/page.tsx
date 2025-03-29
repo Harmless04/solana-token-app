@@ -2,6 +2,7 @@
 import { WalletConnect } from 'components/WalletConnect';
 import { WalletBalance } from 'components/WalletBalance';
 import { CreateToken } from 'components/CreateToken';
+import { MintToken } from 'components/MintToken';
 import { useWallet } from '@solana/wallet-adapter-react';
 
 export default function Home() {
