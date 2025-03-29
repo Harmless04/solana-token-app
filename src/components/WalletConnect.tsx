@@ -1,7 +1,7 @@
 import { FC } from 'react';
 import { useWallet } from '@solana/wallet-adapter-react';
 import { WalletMultiButton } from '@solana/wallet-adapter-react-ui';
-import { truncateAddress } from '@/utils/format';
+import { truncateAddress } from '../utils/format';
 
 export const WalletConnect: FC = () => {
   const { publicKey, connected } = useWallet();
