@@ -1,7 +1,6 @@
 'use client';
 import { useState, useEffect } from 'react';
 import { useConnection, useWallet } from '@solana/wallet-adapter-react';
-import * as web3 from '@solana/web3.js';
 import * as token from '@solana/spl-token';
 import { Card } from './Card';
 
@@ -110,7 +109,7 @@ export const TokenBalances = () => {
           </div>
         ) : (
           <div className="space-y-3">
-            {tokenBalances.map((token, index) => (
+            {tokenBalances.map((token) => (
               <div
                 key={token.mint}
                 className="flex justify-between items-center p-3 bg-gray-50 rounded-lg hover:bg-gray-100 transition-colors border border-gray-200"

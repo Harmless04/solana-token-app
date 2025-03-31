@@ -1,5 +1,5 @@
 A modern frontend application for creating, minting, and managing tokens on the Solana blockchain.
-![alt text](https://file%2B.vscode-resource.vscode-cdn.net/var/folders/y7/49wy45ks7sv3890zpzvhdk1w0000gn/T/TemporaryItems/NSIRD_screencaptureui_iiIMpP/Screenshot%202025-03-31%20at%202.36.21%E2%80%AFPM.png?version%3D1743411987042)
+ 
 Features
 
 Wallet Integration: Easily connect to Phantom, Solflare, and other Solana wallets

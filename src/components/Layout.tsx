@@ -7,7 +7,6 @@ import { ReactNode } from 'react';
 import { motion } from 'framer-motion';
 
 interface LayoutProps {
-  children?: ReactNode;
   walletConnect: ReactNode;
   walletBalance: ReactNode;
   createToken: ReactNode;
@@ -18,7 +17,6 @@ interface LayoutProps {
 }
 
 export const Layout = ({
-  children,
   walletConnect,
   walletBalance,
   createToken,
@@ -108,7 +106,7 @@ export const Layout = ({
   }
 
   return (
-    <div className="flex flex-col min-h-screen bg-gray-50 relative">
+    <div className="flex flex-col min-h-screen bg-gray-50">
       <header className="bg-white border-b border-gray-200 shadow-sm">
         <div className="max-w-7xl mx-auto px-4 py-4 flex justify-between items-center">
           <motion.div 
@@ -134,42 +132,43 @@ export const Layout = ({
         </div>
       </header>
 
-      <div className="flex-grow pb-16">
-        {connected ? (
-          <>
-            <NavigationBar
-              items={navItems}
-              activeItem={activeSection}
-              onItemClick={setActiveSection}
-            />
+      {connected ? (
+        <>
+          <NavigationBar
+            items={navItems}
+            activeItem={activeSection}
+            onItemClick={setActiveSection}
+          />
+          <div className="flex-grow">
             <PageContainer activeSection={activeSection} sections={sections} />
-          </>
-        ) : (
-          <main className="flex-grow flex items-center justify-center">
-            <motion.div 
-              initial={{ opacity: 0, scale: 0.9 }}
-              animate={{ opacity: 1, scale: 1 }}
-              transition={{ type: "spring", duration: 0.6 }}
-              className="text-center max-w-md px-4"
-            >
-              <div className="mb-8 flex justify-center">
-                <div className="h-24 w-24 rounded-full bg-red-100 flex items-center justify-center">
-                  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-12 h-12 text-red-600">
-                    <path strokeLinecap="round" strokeLinejoin="round" d="M21 12a2.25 2.25 0 00-2.25-2.25H5.25A2.25 2.25 0 003 12m18 0v6a2.25 2.25 0 01-2.25 2.25H5.25A2.25 2.25 0 013 18v-6m18 0V9M3 12V9m18 0a2.25 2.25 0 00-2.25-2.25H5.25A2.25 2.25 0 003 9m18 0V6a2.25 2.25 0 00-2.25-2.25H5.25A2.25 2.25 0 003 6v3" />
-                  </svg>
-                </div>
+            <div className="pb-20"></div> {/* Add padding at the bottom */}
+          </div>
+        </>
+      ) : (
+        <main className="flex-grow flex items-center justify-center">
+          <motion.div 
+            initial={{ opacity: 0, scale: 0.9 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ type: "spring", duration: 0.6 }}
+            className="text-center max-w-md px-4"
+          >
+            <div className="mb-8 flex justify-center">
+              <div className="h-24 w-24 rounded-full bg-red-100 flex items-center justify-center">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-12 h-12 text-red-600">
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M21 12a2.25 2.25 0 00-2.25-2.25H5.25A2.25 2.25 0 003 12m18 0v6a2.25 2.25 0 01-2.25 2.25H5.25A2.25 2.25 0 013 18v-6m18 0V9M3 12V9m18 0a2.25 2.25 0 00-2.25-2.25H5.25A2.25 2.25 0 003 9m18 0V6a2.25 2.25 0 00-2.25-2.25H5.25A2.25 2.25 0 003 6v3" />
+                </svg>
               </div>
-              <h2 className="text-2xl font-bold mb-4 text-gray-800">Connect Your Wallet</h2>
-              <p className="mb-8 text-gray-600">
-                Connect your Solana wallet to create and manage tokens on the Solana blockchain.
-              </p>
-              <div className="flex justify-center">{walletConnect}</div>
-            </motion.div>
-          </main>
-        )}
-      </div>
+            </div>
+            <h2 className="text-2xl font-bold mb-4 text-gray-800">Connect Your Wallet</h2>
+            <p className="mb-8 text-gray-600">
+              Connect your Solana wallet to create and manage tokens on the Solana blockchain.
+            </p>
+            <div className="flex justify-center">{walletConnect}</div>
+          </motion.div>
+        </main>
+      )}
 
-      <footer className="bg-white py-6 border-t border-gray-200 text-center text-sm text-gray-600 fixed bottom-0 left-0 right-0 w-full">
+      <footer className="bg-white py-6 border-t border-gray-200 text-center text-sm text-gray-600 fixed bottom-0 left-0 right-0">
         Solana Token Hub • Built on Solana Devnet
       </footer>
     </div>
