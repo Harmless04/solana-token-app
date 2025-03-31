@@ -10,6 +10,7 @@ export const WalletBalance = () => {
   const [balance, setBalance] = useState<number | null>(null);
   const [isLoading, setIsLoading] = useState(false);
   const [mounted, setMounted] = useState(false);
+  const [copied, setCopied] = useState(false);
 
   useEffect(() => {
     setMounted(true);
@@ -41,6 +42,14 @@ export const WalletBalance = () => {
     }
   }, [connection, publicKey, connected, mounted]);
 
+  const copyToClipboard = () => {
+    if (publicKey) {
+      navigator.clipboard.writeText(publicKey.toString());
+      setCopied(true);
+      setTimeout(() => setCopied(false), 2000);
+    }
+  };
+
   if (!mounted) return null;
 
   return (
@@ -64,10 +73,37 @@ export const WalletBalance = () => {
       </div>
 
       <div className="mt-4 pt-4 border-t border-gray-200">
-        <p className="text-sm text-gray-500 mb-1">Wallet Address</p>
-        <p className="font-mono text-sm text-gray-700 truncate">
+        <div className="flex justify-between items-center">
+          <p className="text-sm text-gray-500 mb-1">Wallet Address</p>
+          <button 
+            onClick={copyToClipboard}
+            className="text-xs text-red-600 hover:text-red-700 transition-colors flex items-center"
+          >
+            {copied ? (
+              <>
+                <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 mr-1" viewBox="0 0 20 20" fill="currentColor">
+                  <path d="M9 2a1 1 0 00-.894.553L7.382 4H4a1 1 0 000 2v10a2 2 0 002 2h8a2 2 0 002-2V6a1 1 0 100-2h-3.382l-.724-1.447A1 1 0 0011 2H9zM7 8a1 1 0 012 0v6a1 1 0 11-2 0V8zm5-1a1 1 0 00-1 1v6a1 1 0 102 0V8a1 1 0 00-1-1z" />
+                </svg>
+                Copied!
+              </>
+            ) : (
+              <>
+                <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 mr-1" viewBox="0 0 20 20" fill="currentColor">
+                  <path d="M8 3a1 1 0 011-1h2a1 1 0 110 2H9a1 1 0 01-1-1z" />
+                  <path d="M6 3a2 2 0 00-2 2v11a2 2 0 002 2h8a2 2 0 002-2V5a2 2 0 00-2-2 3 3 0 01-3 3H9a3 3 0 01-3-3z" />
+                </svg>
+                Copy
+              </>
+            )}
+          </button>
+        </div>
+        <div 
+          className="font-mono text-sm text-gray-700 truncate cursor-pointer hover:bg-gray-100 p-2 rounded-md transition-colors"
+          onClick={copyToClipboard}
+          title="Click to copy address"
+        >
           {publicKey?.toString()}
-        </p>
+        </div>
       </div>
     </Card>
   );
