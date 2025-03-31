@@ -1,5 +1,6 @@
 'use client';
 import { useWallet } from '@solana/wallet-adapter-react';
+import { motion } from 'framer-motion';
 
 interface NavItem {
   id: string;
@@ -18,17 +19,26 @@ export const NavigationBar = ({ items, activeItem, onItemClick }: NavigationBarP
       <div className="max-w-7xl mx-auto px-4">
         <div className="flex overflow-x-auto space-x-1">
           {items.map((item) => (
-            <button
-              key={item.id}
-              onClick={() => onItemClick(item.id)}
-              className={`px-4 py-2 text-sm font-medium rounded-md transition-colors ${
-                activeItem === item.id 
-                  ? 'bg-red-600 text-white' 
-                  : 'text-gray-700 hover:text-red-600 hover:bg-gray-100'
-              }`}
-            >
-              {item.title}
-            </button>
+            <div key={item.id} className="relative">
+              <button
+                onClick={() => onItemClick(item.id)}
+                className={`px-4 py-2 text-sm font-medium rounded-md transition-colors ${
+                  activeItem === item.id 
+                    ? 'text-red-600' 
+                    : 'text-gray-700 hover:text-red-600 hover:bg-gray-100'
+                }`}
+              >
+                {item.title}
+                {activeItem === item.id && (
+                  <motion.div
+                    layoutId="activeTab"
+                    className="absolute bottom-0 left-0 right-0 h-0.5 bg-red-600"
+                    initial={false}
+                    transition={{ type: "spring", stiffness: 500, damping: 30 }}
+                  />
+                )}
+              </button>
+            </div>
           ))}
         </div>
       </div>
